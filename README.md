@@ -1,5 +1,7 @@
 # example-env-typescript
 
+[![ci](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml)
+
 A minimal gripsack env repo, typescript frontend. Same shape as
 [example-env-python](https://github.com/gripsack-dev/example-env-python) —
 same IR, same tool, your choice of language.
