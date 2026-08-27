@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@gripsack/core": "^0.1.0"
+    "@gripsack/core": "^0.15.0"
   },
   "devDependencies": {
     "typescript": "^5"

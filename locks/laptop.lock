@@ -1,0 +1,70 @@
+{
+  "modules": {
+    "hello": {
+      "fetch": {
+        "kind": "file",
+        "path": "payloads/hello.tar.gz"
+      },
+      "resolved": {
+        "sha256": "a90fa77261d9d0243e1a6eb140e1558ab2e2e3b34b155ba08d978505a3887f3d"
+      }
+    },
+    "htop": {
+      "fetch": {
+        "kind": "plugin",
+        "name": "apt",
+        "args": {
+          "package": "htop"
+        }
+      },
+      "resolved": {
+        "url": "http://archive.ubuntu.com/ubuntu/pool/main/h/htop/htop_3.3.0-4build1_amd64.deb",
+        "version": "3.3.0-4build1",
+        "sha256": "7d0d96a21c8ca789cdcf50b763e8d0026f50d6e7fd1d21da100c3fb345ce49db"
+      }
+    },
+    "jq": {
+      "fetch": {
+        "kind": "brew",
+        "formula": "jq"
+      },
+      "resolved": {
+        "url": "https://ghcr.io/v2/homebrew/core/jq/blobs/sha256:631787d9b19df5e5557cc83f972080e541f543f8df2d1f212ca4290ff23e9764",
+        "version": "1.8.2",
+        "sha256": "631787d9b19df5e5557cc83f972080e541f543f8df2d1f212ca4290ff23e9764"
+      }
+    },
+    "patched": {
+      "fetch": {
+        "kind": "file",
+        "path": "payloads/hello.tar.gz"
+      },
+      "resolved": {
+        "sha256": "a90fa77261d9d0243e1a6eb140e1558ab2e2e3b34b155ba08d978505a3887f3d"
+      }
+    },
+    "ripgrep": {
+      "fetch": {
+        "kind": "pixi",
+        "package": "ripgrep"
+      },
+      "resolved": {
+        "sha256": "b4b45eb0ed0aeb9cd8fec821edef96eece8b3194e91901e68e3e68cd572165d1"
+      }
+    },
+    "starship": {
+      "fetch": {
+        "kind": "github_release",
+        "repo": "starship/starship",
+        "asset": "starship-x86_64-unknown-linux-musl.tar.gz",
+        "version": "v1.20.0"
+      },
+      "resolved": {
+        "url": "https://github.com/starship/starship/releases/download/v1.20.0/starship-x86_64-unknown-linux-musl.tar.gz",
+        "version": "v1.20.0",
+        "sha256": "8b674659524fc6147f1b9857ed0135db277378f5dec2a98763502ce1471fa886",
+        "api_url": "https://api.github.com/repos/starship/starship/releases/assets/182063683"
+      }
+    }
+  }
+}
