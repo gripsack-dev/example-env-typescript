@@ -3,7 +3,7 @@
 
 import { module, trackedCopy } from "@gripsack/core";
 
-module("editor", {
+export default module("editor", {
   config: {
     "configs/editor.toml": trackedCopy("~/.config/editor/editor.toml"),
   },

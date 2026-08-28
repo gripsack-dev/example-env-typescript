@@ -33,4 +33,4 @@ class Patched extends Module {
   }
 }
 
-define(Patched);
+export default define(Patched);

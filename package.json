@@ -2,10 +2,10 @@
   "name": "example-env-typescript",
   "private": true,
   "type": "module",
-  "dependencies": {
-    "@gripsack/core": "^0.15.0"
-  },
   "devDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "@gripsack/core": "file:../gripsack/typescript"
   }
 }

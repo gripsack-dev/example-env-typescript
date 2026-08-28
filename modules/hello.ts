@@ -3,7 +3,7 @@
 
 import { dep, fileFetch, module, symlink, verifyBinary } from "@gripsack/core";
 
-module("hello", {
+export default module("hello", {
   fetch: fileFetch("payloads/hello.tar.gz"),
   install: { "bin/hello": symlink("~/.local/bin/hello") },
   verify: verifyBinary("bin/hello"),
