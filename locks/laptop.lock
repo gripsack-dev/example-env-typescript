@@ -6,7 +6,8 @@
         "path": "payloads/hello.tar.gz"
       },
       "resolved": {
-        "sha256": "a90fa77261d9d0243e1a6eb140e1558ab2e2e3b34b155ba08d978505a3887f3d"
+        "sha256": "a90fa77261d9d0243e1a6eb140e1558ab2e2e3b34b155ba08d978505a3887f3d",
+        "tree256": "145cb9a4957a1fc27131e6c89c86376c5785ba9cc2046c677447993623ebde52"
       }
     },
     "htop": {
@@ -20,7 +21,8 @@
       "resolved": {
         "url": "http://archive.ubuntu.com/ubuntu/pool/main/h/htop/htop_3.3.0-4build1_amd64.deb",
         "version": "3.3.0-4build1",
-        "sha256": "7d0d96a21c8ca789cdcf50b763e8d0026f50d6e7fd1d21da100c3fb345ce49db"
+        "sha256": "7d0d96a21c8ca789cdcf50b763e8d0026f50d6e7fd1d21da100c3fb345ce49db",
+        "tree256": "7d0d96a21c8ca789cdcf50b763e8d0026f50d6e7fd1d21da100c3fb345ce49db"
       }
     },
     "jq": {
@@ -31,7 +33,8 @@
       "resolved": {
         "url": "https://ghcr.io/v2/homebrew/core/jq/blobs/sha256:631787d9b19df5e5557cc83f972080e541f543f8df2d1f212ca4290ff23e9764",
         "version": "1.8.2",
-        "sha256": "631787d9b19df5e5557cc83f972080e541f543f8df2d1f212ca4290ff23e9764"
+        "sha256": "631787d9b19df5e5557cc83f972080e541f543f8df2d1f212ca4290ff23e9764",
+        "tree256": "89c3f544c150d3fe4d9933edbaf6c7c94e7572a9d2014b6ec8687369767715ce"
       }
     },
     "patched": {
@@ -49,7 +52,8 @@
         "package": "ripgrep"
       },
       "resolved": {
-        "sha256": "e1d59570954a22ca864004229d6f64764e9f38fd50a673ad25686a19654cb5af"
+        "sha256": "e1d59570954a22ca864004229d6f64764e9f38fd50a673ad25686a19654cb5af",
+        "tree256": "e1d59570954a22ca864004229d6f64764e9f38fd50a673ad25686a19654cb5af"
       }
     },
     "starship": {
@@ -60,10 +64,8 @@
         "version": "v1.20.0"
       },
       "resolved": {
-        "url": "https://github.com/starship/starship/releases/download/v1.20.0/starship-x86_64-unknown-linux-musl.tar.gz",
-        "version": "v1.20.0",
         "sha256": "8b674659524fc6147f1b9857ed0135db277378f5dec2a98763502ce1471fa886",
-        "api_url": "https://api.github.com/repos/starship/starship/releases/assets/182063683"
+        "tree256": "f6477c9d9b5c8452da08a9f1babf7c9bf08e6984234fe198fed6f121b22af4aa"
       }
     }
   }
