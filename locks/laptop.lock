@@ -46,16 +46,6 @@
         "sha256": "a90fa77261d9d0243e1a6eb140e1558ab2e2e3b34b155ba08d978505a3887f3d"
       }
     },
-    "ripgrep": {
-      "fetch": {
-        "kind": "pixi",
-        "package": "ripgrep"
-      },
-      "resolved": {
-        "sha256": "e1d59570954a22ca864004229d6f64764e9f38fd50a673ad25686a19654cb5af",
-        "tree256": "e1d59570954a22ca864004229d6f64764e9f38fd50a673ad25686a19654cb5af"
-      }
-    },
     "starship": {
       "fetch": {
         "kind": "github_release",
@@ -64,8 +54,11 @@
         "version": "v1.20.0"
       },
       "resolved": {
+        "url": "https://github.com/starship/starship/releases/download/v1.20.0/starship-x86_64-unknown-linux-musl.tar.gz",
+        "version": "v1.20.0",
         "sha256": "8b674659524fc6147f1b9857ed0135db277378f5dec2a98763502ce1471fa886",
-        "tree256": "f6477c9d9b5c8452da08a9f1babf7c9bf08e6984234fe198fed6f121b22af4aa"
+        "tree256": "f6477c9d9b5c8452da08a9f1babf7c9bf08e6984234fe198fed6f121b22af4aa",
+        "api_url": "https://api.github.com/repos/starship/starship/releases/assets/182063683"
       }
     }
   }

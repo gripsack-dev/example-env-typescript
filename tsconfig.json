@@ -8,5 +8,5 @@
     "allowImportingTsExtensions": true,
     "skipLibCheck": true
   },
-  "include": ["modules/**/*.ts", "hosts/**/*.ts"]
+  "include": ["modules/**/*.ts", "hosts/**/*.ts", "workspaces/**/*.ts"]
 }
