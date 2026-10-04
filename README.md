@@ -2,7 +2,7 @@
 
 [![ci](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml)
 
-Linux x86_64 API examples for the **unreleased 0.44 candidate**. This branch is
+Linux x86_64 API examples for the **unreleased 0.44.1 candidate**. This branch is
 not a recipe for the published 0.43 frontend. CI checks a pinned candidate core
 checkout; `package.json` deliberately links its sibling `../gripsack/typescript`.
 
@@ -33,7 +33,7 @@ npx tsc
 
 Both entrypoints are typechecked. The core repository's example workflow also
 runs their real CLI paths against its candidate binary. Publishing the matching
-0.44 SDK/core and changing this explicit source pin belong to the release rollout;
+0.44.1 SDK/core and changing this explicit source pin belong to the release rollout;
 this branch does not claim they are already on the registries.
 
 ## Try the reviewed examples
@@ -56,7 +56,7 @@ approve_reviewed_example
 grip apply --host laptop       # already satisfied
 ```
 
-Before 0.44 artifacts are published, build the byte-pinned Conda helper from the
+Before 0.44.1 artifacts are published, build the byte-pinned Conda helper from the
 same core checkout and use its matching file mirror:
 
 ```sh
@@ -81,3 +81,8 @@ that prefix. To deliberately select newer packages, run `grip update ripgrep`,
 review the changed lock, and approve its new source digest before consuming it.
 `grip rollback` selects retained personal state. Mac runtime qualification is
 not claimed by these Linux examples.
+
+The workspace lock includes captured frontend identity for SDK 0.44.1. It was
+migrated through `grip update ripgrep`, not by editing fingerprints. Selecting a
+different SDK can require another explicit update and source approval; frozen
+consumers do not silently accept changed frontend bytes.
