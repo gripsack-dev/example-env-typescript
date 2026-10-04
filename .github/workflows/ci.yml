@@ -1,6 +1,6 @@
 name: ci
 
-# Candidate 0.44.1 API canary; the source pin makes the unreleased SDK explicit.
+# Check both entrypoints against the exact published SDK in package-lock.json.
 on:
   workflow_dispatch:
   push:
@@ -12,17 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          path: example
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          repository: gripsack-dev/gripsack
-          ref: b708f8a286b00bfa0a8aa7ee7dc612c564f18389
-          path: gripsack
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v6
         with:
           node-version: 22.23.2
-      - run: npm ci && npm run build
-        working-directory: gripsack/typescript
       - run: npm ci && npx tsc
-        working-directory: example

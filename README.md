@@ -2,9 +2,9 @@
 
 [![ci](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml)
 
-Linux x86_64 API examples for the **unreleased 0.44.1 candidate**. This branch is
-not a recipe for the published 0.43 frontend. CI checks a pinned candidate core
-checkout; `package.json` deliberately links its sibling `../gripsack/typescript`.
+Linux x86_64 API examples for **gripsack 0.44.1** and **@gripsack/core 0.44.1**.
+`package.json` and its lock select the published SDK; no sibling core checkout
+or private SDK build is required.
 
 ## Two independent entrypoints
 
@@ -23,23 +23,27 @@ workspace needs no builder, private Pixi installation or ambient Conda prefix.
 
 ## Typecheck
 
-With the candidate `gripsack` checkout beside this repository:
+Install the locked npm dependencies and check both entrypoints:
 
 ```sh
-(cd ../gripsack/typescript && npm ci && npm run build)
 npm ci
 npx tsc
 ```
 
-Both entrypoints are typechecked. The core repository's example workflow also
-runs their real CLI paths against its candidate binary. Publishing the matching
-0.44.1 SDK/core and changing this explicit source pin belong to the release rollout;
-this branch does not claim they are already on the registries.
+The standalone CI uses the same published SDK and lockfile. The core repository
+separately runs its pinned API-canary fixture against its candidate SDK and binary.
 
 ## Try the reviewed examples
 
-Use the matching candidate `grip` binary. Start with disposable state; `apply`
-otherwise changes your real home. Inspect the checkout before approving it.
+Use the matching [released `grip` binary](https://github.com/gripsack-dev/gripsack/releases/tag/core-v0.44.1).
+Start with disposable state; `apply` otherwise changes your real home. Inspect
+the checkout before approving it.
+The legacy `htop` lock targets Ubuntu 24.04. Run that entrypoint in the matching
+environment with configured, refreshed apt indexes (`sudo apt update`); another
+distro's package version does not satisfy the lock. The Conda entrypoint is
+independent of those apt records.
+The legacy apt transport extracts one package, not its dependency closure, so
+that package's native runtime libraries must already be installed on the host.
 
 ```sh
 export HOME="$(mktemp -d)"
@@ -56,14 +60,11 @@ approve_reviewed_example
 grip apply --host laptop       # already satisfied
 ```
 
-Before 0.44.1 artifacts are published, build the byte-pinned Conda helper from the
-same core checkout and use its matching file mirror:
+For the independent Conda workspace, use a fresh home. The released core
+provisions its byte-pinned helper automatically; no source build or helper
+override is required:
 
 ```sh
-helper_assets="$(mktemp -d)"
-sh ../gripsack/tools/conda-helper/dist.sh --dist "$helper_assets" \
-  --target x86_64-unknown-linux-musl --check
-export GRIPSACK_CONDA_HELPER_MIRROR="$helper_assets"
 cd workspaces/conda
 export HOME="$(mktemp -d)"
 export GRIPSACK_HOME="$HOME/.gs"

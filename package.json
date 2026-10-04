@@ -7,6 +7,6 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@gripsack/core": "file:../gripsack/typescript"
+    "@gripsack/core": "0.44.1"
   }
 }
