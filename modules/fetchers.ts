@@ -1,27 +1,20 @@
-/** Fetcher showcase: one module per transport (the retired python
- *  example's twin).
+/** Legacy module fetcher showcase. The coherent Conda example has its own
+ *  workspace entrypoint under workspaces/conda; no global Pixi install.
  *
  *  - brew: a bottle from Homebrew (floats to the current formula —
  *    `grip update jq` to move deliberately)
- *  - pixi: a conda package via pixi (grip provisions pixi itself)
  *  - githubRelease: a pinned GitHub release (version= is honored)
  *  - apt: a distro package via gripfetch-apt, provisioned by the plugin
  *    lifecycle from its GitHub release
  */
 
-import { brew, githubRelease, module, pixi, pluginFetch, symlink, verifyBinary } from "@gripsack/core";
+import { brew, githubRelease, module, pluginFetch, symlink, verifyBinary } from "@gripsack/core";
 
 export default [
   module("jq", {
     fetch: brew("jq"),
     install: { "jq/{version}/bin/jq": symlink("~/.local/bin/jq") },
     verify: verifyBinary("jq/{version}/bin/jq", ["--version"]),
-  }),
-
-  module("ripgrep", {
-    fetch: pixi("ripgrep"),
-    install: { "bin/rg": symlink("~/.local/bin/rg") },
-    verify: verifyBinary("bin/rg", ["--version"]),
   }),
 
   module("starship", {
