@@ -1,7 +1,7 @@
 {
   "lock_version": 2,
   "definitions": {
-    "frontend": "a73e7c817989de699369ec2077e7850a2819b32c7bdaec26d224f29648720bae"
+    "frontend": "d3ebc0d1838ab311e0a4beb14658cd432dd7e57f1a062e8dbd19bd436333aa5f"
   },
   "resolutions": {
     "linux-x86_64-gnu": {
@@ -18,7 +18,7 @@
             }
           },
           "resolved": {
-            "sha256": "ae56dc0675b8020400748bf49a589dcdd701a60b3cc75c2377b8aeae704216a3"
+            "sha256": "daeb9d475ee10847760a7a7be0cbc4870b3b6208ce7045bb1e133f47ac83fd5c"
           },
           "conda": {
             "platform": "linux-64",
@@ -40,7 +40,7 @@
               },
               {
                 "name": "__glibc",
-                "version": "2.39",
+                "version": "2.41",
                 "build": "0"
               },
               {
