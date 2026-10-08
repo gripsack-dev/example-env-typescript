@@ -53,6 +53,7 @@ Run from the repository root. Keep **all** state outside the checkout so state
 writes cannot change captured source:
 
 ```sh
+set -eu
 state="$(mktemp -d /tmp/gripsack-example.XXXXXX)"
 export HOME="$state/home" GRIPSACK_HOME="$state/gripsack"
 export XDG_CONFIG_HOME="$state/config" XDG_CACHE_HOME="$state/cache"
@@ -70,6 +71,7 @@ inspection being checked. After setting `EXPECTED_BUNDLE` and `EXPECTED_POLICY`
 to those reviewed values, compare before adding approval:
 
 ```sh
+set -eu
 approve_reviewed_example() {
   : "${EXPECTED_BUNDLE:?Set the separately reviewed bundle digest}"
   : "${EXPECTED_POLICY:?Set the separately reviewed policy digest}"
@@ -96,6 +98,7 @@ The released core provisions its byte-pinned helper automatically; no source
 build, helper mirror or private helper override is required:
 
 ```sh
+set -eu
 cd workspaces/conda
 grip trust inspect --json
 # Set EXPECTED_BUNDLE and EXPECTED_POLICY from the separate workspace review.
