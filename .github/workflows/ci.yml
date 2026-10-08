@@ -1,6 +1,6 @@
 name: ci
 
-# Check both entrypoints against the exact published SDK in package-lock.json.
+# Check both entrypoints against published @gripsack/core 0.45.0 in package-lock.json.
 on:
   workflow_dispatch:
   push:
