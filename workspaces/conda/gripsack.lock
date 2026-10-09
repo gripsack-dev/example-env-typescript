@@ -1,7 +1,7 @@
 {
   "lock_version": 2,
   "definitions": {
-    "frontend": "07d86cbf9cced6559e02e6b2b6ab9653175db1f1316a3bbb0dfdfd0920d88376"
+    "frontend": "0cdba672bf746b4d6e8afa8c7c3faf1fcf8a33c41df6c185cec67b74f2e3cd92"
   },
   "resolutions": {
     "linux-x86_64-gnu": {
@@ -18,7 +18,7 @@
             }
           },
           "resolved": {
-            "sha256": "ae56dc0675b8020400748bf49a589dcdd701a60b3cc75c2377b8aeae704216a3"
+            "sha256": "44414b60142a9a1750725c77e6db08ef930d850deb199529c97b27b0df63e2a1"
           },
           "conda": {
             "platform": "linux-64",
@@ -26,7 +26,18 @@
               "https://conda.anaconda.org/conda-forge"
             ],
             "channel_priority": "strict",
-            "system_requirements": {},
+            "system_requirements": {
+              "virtual_packages": [
+                {
+                  "name": "__glibc",
+                  "minimum_version": "2.28"
+                },
+                {
+                  "name": "__linux",
+                  "minimum_version": "4.18"
+                }
+              ]
+            },
             "virtual_packages": [
               {
                 "name": "__unix",
@@ -35,12 +46,12 @@
               },
               {
                 "name": "__linux",
-                "version": "6.18.33.2",
+                "version": "4.18",
                 "build": "0"
               },
               {
                 "name": "__glibc",
-                "version": "2.39",
+                "version": "2.28",
                 "build": "0"
               },
               {
