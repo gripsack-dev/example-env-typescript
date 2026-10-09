@@ -8,6 +8,10 @@ const ripgrep = pkg("ripgrep", {
   producer: provider(conda.environment({
     channels: ["conda-forge"],
     packages: { ripgrep: "*" },
+    systemRequirements: {
+      libc: { family: "glibc", version: "2.28" },
+      linux: "4.18",
+    },
   })),
   commands: { rg: "bin/rg" },
   target,

@@ -2,7 +2,7 @@
 
 [![ci](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml)
 
-Linux x86_64 API examples for **gripsack 0.45.0** and **@gripsack/core 0.45.0**.
+Linux x86_64 API examples for **gripsack 0.46.0** and **@gripsack/core 0.46.0**.
 `package.json` and its lock select the published SDK; no sibling core checkout
 or private SDK build is required.
 
@@ -13,9 +13,9 @@ or private SDK build is required.
   `hello`, a patch step, and tracked editor configuration. Their producers and
   existing byte pins are unchanged.
 - `workspaces/conda/gripsack.ts` demonstrates coherent Conda `ripgrep`: one full
-  transitive lock, final-prefix materialization, a project environment, a direct
-  task and a personal profile. It replaces the old unpinned global-Pixi install.
-  The obsolete legacy ripgrep lock was removed, not repinned to unstable bytes.
+  transitive lock, an explicit glibc2.28/Linux4.18 solve baseline, final-prefix
+  materialization, a project environment, a direct task and a personal profile.
+  The obsolete global-Pixi path and legacy ripgrep lock are not restored.
 
 Keeping separate entrypoints preserves the bottle/plugin/steps demonstrations
 without pretending those legacy producers are workspace recipes. The Conda
@@ -35,7 +35,7 @@ separately runs its pinned API-canary fixture against its candidate SDK and bina
 
 ## Try the reviewed examples
 
-Use the matching [released `grip` binary](https://github.com/gripsack-dev/gripsack/releases/tag/core-v0.45.0),
+Use the matching [released `grip` binary](https://github.com/gripsack-dev/gripsack/releases/tag/core-v0.46.0),
 verifying its archive against the published SHA-256 sidecar before extracting.
 Start with disposable state; `apply` otherwise changes your real home. Review
 the exact checkout, SDK, lockfiles and effective policy before approving them.
@@ -117,14 +117,22 @@ The committed lock reconstructs a cold prefix from its exact archive URLs and
 hashes. Frozen build/run/task/shell/profile consumers never solve again or mutate
 that prefix. To deliberately select newer packages, run `grip update ripgrep`,
 review the changed lock, and approve its new source digest before consuming it.
-`grip rollback` selects retained personal state. Mac runtime qualification is
-not claimed by these Linux examples.
+`grip rollback` selects retained personal state. These examples target Linux
+x86_64/WSL only; no ARM, macOS or native Windows qualification is claimed.
 
-The workspace lock includes captured frontend identity for SDK 0.45.0. It was
+The workspace lock includes captured frontend identity for SDK 0.46.0. It was
 migrated through `grip update ripgrep`, not by editing fingerprints. Review the
 entire generated lock (frontend identity, platform assumptions, package versions,
 archive URLs and hashes) before renewing approval. Selecting a different SDK
 can require another explicit update and source approval; frozen consumers do
 not silently accept changed frontend bytes.
-The committed migration was generated in Ubuntu 24.04 (glibc 2.39) on Linux
-x86_64; its existing Conda package archives remain pinned to the same bytes.
+The migration was generated in Ubuntu24.04 (glibc2.39), using the declared
+glibc2.28/Linux4.18 solver virtuals. All four Conda archive identities and the
+legacy byte pins remained unchanged. A solve floor is not proof of every host's
+CPU/kernel/runtime compatibility.
+
+The public0.46 core, installed npm SDK and default downloaded helper passed the
+legacy and workspace journeys as UID1000. A separate network-disabled run with
+the helper removed reused the frozen prefix without changing lock bytes, prefix
+contents, modes, inodes or mtimes. That is Linux userspace on the observed WSL
+kernel, not a physical-power-loss or universal portability claim.
