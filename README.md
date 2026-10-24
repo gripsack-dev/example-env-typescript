@@ -2,9 +2,10 @@
 
 [![ci](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml)
 
-Linux x86_64 API examples for **gripsack 0.46.0** and **@gripsack/core 0.46.0**.
-`package.json` and its lock select the published SDK; no sibling core checkout
-or private SDK build is required.
+Linux x86_64 API examples for **gripsack 0.47.0**. The Conda workspace uses
+the core's embedded **0.47.0 frontend (IR8)**. The independent legacy root keeps
+its published **@gripsack/core 0.46.0** npm pin; no unpublished npm lock or
+vendored SDK is needed.
 
 ## Two independent entrypoints
 
@@ -30,13 +31,19 @@ npm ci
 npx tsc
 ```
 
-The standalone CI uses the same published SDK and lockfile. The core repository
-separately runs its pinned API-canary fixture against its candidate SDK and binary.
+The manually dispatched typecheck uses the published 0.46.0 SDK
+and lockfile; these examples use APIs present in that SDK. This does not qualify
+the 0.47.0 runtime or its frozen workspace lock. The core repository separately
+runs its pinned API-canary fixture against its candidate SDK and binary.
 
 ## Try the reviewed examples
 
-Use the matching [released `grip` binary](https://github.com/gripsack-dev/gripsack/releases/tag/core-v0.46.0),
-verifying its archive against the published SHA-256 sidecar before extracting.
+Use the matching [0.47.0 `grip` release](https://github.com/gripsack-dev/gripsack/releases/tag/core-v0.47.0)
+once published, through its verified installer with GitHub CLI2.102.0 or newer.
+The signed local-qualification manifest and exact artifact identities are the
+release contract; a SHA-256 sidecar alone is not signature verification.
+Before publication, reviewers need the separately supplied0.47.0 candidate
+binary and measured helper, not an older released core.
 Start with disposable state; `apply` otherwise changes your real home. Review
 the exact checkout, SDK, lockfiles and effective policy before approving them.
 The legacy `htop` lock targets Ubuntu 24.04. Run that entrypoint in the matching
@@ -94,8 +101,12 @@ an unattended production approval recipe.
 
 For the independent Conda workspace, repeat the state setup above with a new
 directory, then inspect and separately review this entrypoint's expected digests.
-The released core provisions its byte-pinned helper automatically; no source
-build, helper mirror or private helper override is required:
+Run in `workspaces/conda` without installing a workspace-local npm SDK:
+`@gripsack/core` resolves to the embedded frontend, not the root's editor/npm
+dependency. An installed `workspaces/conda/node_modules/@gripsack/core` would
+deliberately change the captured import identity. The released core provisions
+its byte-pinned helper automatically; candidate reviewers instead need their
+separately supplied measured helper in disposable state.
 
 ```sh
 set -eu
@@ -106,7 +117,7 @@ approve_reviewed_example
 grip check
 grip build ripgrep
 grip run --env search -- rg --version
-grip task version
+grip task run version
 grip apply personal
 grip apply personal            # already satisfied
 grip shell search              # process-scoped rg; exit to leave the shell
@@ -120,18 +131,43 @@ review the changed lock, and approve its new source digest before consuming it.
 `grip rollback` selects retained personal state. These examples target Linux
 x86_64/WSL only; no ARM, macOS or native Windows qualification is claimed.
 
-The workspace lock includes captured frontend identity for SDK 0.46.0. It was
-migrated through `grip update ripgrep`, not by editing fingerprints. Review the
-entire generated lock (frontend identity, platform assumptions, package versions,
-archive URLs and hashes) before renewing approval. Selecting a different SDK
-can require another explicit update and source approval; frozen consumers do
-not silently accept changed frontend bytes.
-The migration was generated in Ubuntu24.04 (glibc2.39), using the declared
-glibc2.28/Linux4.18 solver virtuals. All four Conda archive identities and the
-legacy byte pins remained unchanged. A solve floor is not proof of every host's
-CPU/kernel/runtime compatibility.
+The workspace lock was migrated on 2026-10-24 through ordinary
+`grip trust inspect --json`, exact `grip trust add --bundle … --policy …`
+approval of the reviewed fixture, and `grip update ripgrep`. Generation used
+the actual 0.47.0 development core and its embedded frontend, isolated
+`HOME`/`GRIPSACK_HOME`/XDG directories outside the checkout, and explicit
+`GRIPSACK_DENO` and `GRIPSACK_CONDA_HELPER` overrides only in that disposable
+state. No frontend fingerprints or provisioning markers were hand-edited.
 
-The public0.46 core, installed npm SDK and default downloaded helper passed the
+Migration artifact provenance:
+
+- Core: `native-development-zqu1xm0m/grip`, SHA-256
+  `15ed7d63aacaa2999b27341d442d28e143b41525579232c6c6e5d981f8e26bf7`.
+- Helper: `gripsack-conda-0.47.0-x86_64-unknown-linux-musl`, SHA-256
+  `c52dd5389d3cb1a221b14d5f765e5c943fa170d97529c7a0cb986cc4fd7d9f2f`.
+- Pinned Deno executable SHA-256:
+  `bceb5b6a6239b0b010418406d8c77a508f67cf4337d94288f1c19fe71304aab0`.
+- Generated lock SHA-256:
+  `8a0de0c22f7f6acaf5d18322eb01525f94cf5382528b671a7a984e5ca97cb066`.
+
+Only the captured frontend definition changed, from
+`0cdba672bf746b4d6e8afa8c7c3faf1fcf8a33c41df6c185cec67b74f2e3cd92` to
+`caafff8b24ff614e78080f7182271f32603212fd85e767fa8be9e02214b7db67`.
+All resolution records remained identical: `_openmp_mutex 4.5 20_gnu`,
+`libgcc 16.2.0 ha9f2e26_7`, `libgomp 16.2.0 he0feb66_7`, and
+`ripgrep 15.2.0 hf19af3b_1`, including archive URLs and hashes. The authored
+`ripgrep: "*"` declaration, glibc2.28/Linux4.18 solver baseline, and legacy
+byte pins were preserved; no solver-chosen closure changes occurred.
+
+Review the entire generated lock before renewing source approval. Selecting
+different frontend bytes can require another explicit update; frozen consumers
+do not silently migrate. A solve floor is not proof of every host's
+CPU/kernel/runtime compatibility. This migration generated the lock only:
+0.47.0 build/run/task/profile and retained-prefix qualification remains a
+separate release acceptance step against the final candidate artifacts.
+
+Historical 0.46.0 evidence (not a 0.47.0 qualification): the public core,
+installed npm SDK and default downloaded helper passed the
 legacy and workspace journeys as UID1000. A separate network-disabled run with
 the helper removed reused the frozen prefix without changing lock bytes, prefix
 contents, modes, inodes or mtimes. That is Linux userspace on the observed WSL

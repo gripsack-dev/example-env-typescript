@@ -1,11 +1,8 @@
 name: ci
 
-# Check both entrypoints against published @gripsack/core 0.46.0 in package-lock.json.
+# Optional published-SDK diagnostic; candidate acceptance runs in the core's local gate.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-  pull_request:
 
 jobs:
   typecheck:
