@@ -7,6 +7,6 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@gripsack/core": "0.46.0"
+    "@gripsack/core": "https://github.com/gripsack-dev/gripsack/releases/download/core-v0.50.0/gripsack-core-0.50.0.tgz"
   }
 }

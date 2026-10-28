@@ -1,0 +1,290 @@
+{
+  "lock_version": 2,
+  "definitions": {
+    "frontend": "16deab7a66186c1cfec64cfb32204d5d2c4621c8d852422a7f1003cf57ac6d83",
+    "imports": {
+      "@gripsack/core": "2a4cdd2ffbbc323d96821255308dac7da4c46ffd09c2762a27fd820173e61bcd",
+      "@types/node": "f5bea22b23c8c9b4af945e7a1ea2d9d577f2dd49305ce4cd0f22b392ff0b0db3",
+      "typescript": "e3c527fc0ad721959f1751893f0923f27503a5b2e7e1bfa62c2dd61db797fc90",
+      "undici-types": "a3033f5fdf74aa4ea8ce8757ba563440e495c486a7de8eef39dc3de2234bafe9"
+    }
+  },
+  "resolutions": {
+    "linux-x86_64-gnu": {
+      "pins": [
+        {
+          "output": "starship",
+          "source": {
+            "kind": "fetch",
+            "fetch": {
+              "kind": "github_release",
+              "repo": "starship/starship",
+              "asset": "starship-x86_64-unknown-linux-musl.tar.gz",
+              "version": "v1.20.0",
+              "sha256": "8b674659524fc6147f1b9857ed0135db277378f5dec2a98763502ce1471fa886"
+            }
+          },
+          "resolved": {
+            "url": "https://github.com/starship/starship/releases/download/v1.20.0/starship-x86_64-unknown-linux-musl.tar.gz",
+            "version": "v1.20.0",
+            "sha256": "8b674659524fc6147f1b9857ed0135db277378f5dec2a98763502ce1471fa886",
+            "tree256": "f6477c9d9b5c8452da08a9f1babf7c9bf08e6984234fe198fed6f121b22af4aa",
+            "api_url": "https://api.github.com/repos/starship/starship/releases/assets/182063683"
+          }
+        },
+        {
+          "output": "utilities",
+          "source": {
+            "kind": "conda_environment",
+            "channels": [
+              "conda-forge"
+            ],
+            "packages": {
+              "htop": "*",
+              "jq": "*"
+            }
+          },
+          "resolved": {
+            "sha256": "4ba084b62b837c6b0ea60f725fbcbd3cb0e77685ebf983c8aa6b919ecb63759d"
+          },
+          "conda": {
+            "platform": "linux-64",
+            "channels": [
+              "https://conda.anaconda.org/conda-forge"
+            ],
+            "channel_priority": "strict",
+            "system_requirements": {
+              "virtual_packages": [
+                {
+                  "name": "__glibc",
+                  "minimum_version": "2.28"
+                },
+                {
+                  "name": "__linux",
+                  "minimum_version": "4.18"
+                }
+              ]
+            },
+            "virtual_packages": [
+              {
+                "name": "__unix",
+                "version": "0",
+                "build": "0"
+              },
+              {
+                "name": "__linux",
+                "version": "4.18",
+                "build": "0"
+              },
+              {
+                "name": "__glibc",
+                "version": "2.28",
+                "build": "0"
+              },
+              {
+                "name": "__archspec",
+                "version": "1",
+                "build": "x86_64"
+              }
+            ],
+            "packages": [
+              {
+                "name": "_openmp_mutex",
+                "version": "4.5",
+                "build": "20_gnu",
+                "build_number": 20,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-20_gnu.conda",
+                "sha256": "1dd3fffd892081df9726d7eb7e0dea6198962ba775bd88842135a4ddb4deb3c9",
+                "size": 28948,
+                "timestamp": 1770939786096,
+                "md5": "a9f577daf3de00bca7c3c76c0ecbd1de",
+                "license": "BSD-3-Clause",
+                "license_family": "BSD",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0",
+                  "libgomp >=7.5.0"
+                ],
+                "constrains": [
+                  "openmp_impl <0.0a0"
+                ],
+                "run_exports": {
+                  "strong": [
+                    "_openmp_mutex >=4.5"
+                  ]
+                }
+              },
+              {
+                "name": "htop",
+                "version": "3.5.3",
+                "build": "h3cf9a74_0",
+                "build_number": 0,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/htop-3.5.3-h3cf9a74_0.conda",
+                "sha256": "ec719d96f18659afd93b24cc6799e206c3058d4680220d87238ed24ac1ef4ca9",
+                "size": 187370,
+                "timestamp": 1787008972898,
+                "md5": "64bd11df54557c5dd2206e953d7453ff",
+                "license": "GPL-2.0-only",
+                "license_family": "GPL",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0",
+                  "libgcc >=15",
+                  "libnl >=3.11.0,<4.0a0",
+                  "ncurses >=6.6,<7.0a0"
+                ],
+                "run_exports": {}
+              },
+              {
+                "name": "jq",
+                "version": "1.8.2",
+                "build": "h280c20c_1",
+                "build_number": 1,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/jq-1.8.2-h280c20c_1.conda",
+                "sha256": "f14c52155ba14ccb41fdd6f71d74b21153c35e131185434da7334cf25b3eef46",
+                "size": 317374,
+                "timestamp": 1786434969272,
+                "md5": "6ec056e539486e84f0c7acef6b5863f9",
+                "license": "MIT",
+                "license_family": "MIT",
+                "depends": [
+                  "oniguruma 6.9.*",
+                  "libgcc >=14",
+                  "__glibc >=2.17,<3.0.a0",
+                  "oniguruma >=6.9.10,<6.10.0a0"
+                ],
+                "run_exports": {}
+              },
+              {
+                "name": "libgcc",
+                "version": "16.2.0",
+                "build": "ha9f2e26_7",
+                "build_number": 7,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/libgcc-16.2.0-ha9f2e26_7.conda",
+                "sha256": "e031634c3a928f9594eba868bc46ef5230d6571a364a0c63215b06c4563bfcea",
+                "size": 1058444,
+                "timestamp": 1790303109576,
+                "md5": "735629b400b70eeab21a2ba8f5b1c2ce",
+                "license": "GPL-3.0-only WITH GCC-exception-3.1",
+                "license_family": "GPL",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0",
+                  "_openmp_mutex >=4.5"
+                ],
+                "constrains": [
+                  "libgcc-ng ==16.2.0=*_7",
+                  "libgomp 16.2.0 he0feb66_7"
+                ],
+                "run_exports": {}
+              },
+              {
+                "name": "libgomp",
+                "version": "16.2.0",
+                "build": "he0feb66_7",
+                "build_number": 7,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/libgomp-16.2.0-he0feb66_7.conda",
+                "sha256": "92a0bb350c7be6a4eedcb4e111c60aefd176018e6b1c009a6e025dbe9bbcd758",
+                "size": 640566,
+                "timestamp": 1790303046034,
+                "md5": "d904c7ddd95e026254b4b80808ee9e12",
+                "license": "GPL-3.0-only WITH GCC-exception-3.1",
+                "license_family": "GPL",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0"
+                ],
+                "run_exports": {
+                  "strong": [
+                    "_openmp_mutex >=4.5"
+                  ]
+                }
+              },
+              {
+                "name": "libnl",
+                "version": "3.11.0",
+                "build": "hb03c661_1",
+                "build_number": 1,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/libnl-3.11.0-hb03c661_1.conda",
+                "sha256": "d0f2fd77aad83641c11bc3686bac677e99869f1d62b99e5064c9d99af8bfde6a",
+                "size": 735004,
+                "timestamp": 1787038268022,
+                "md5": "eeaf53e3c9593d63ffee5ad97182858e",
+                "license": "LGPL-2.1-or-later",
+                "license_family": "LGPL",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0",
+                  "libgcc >=14"
+                ],
+                "run_exports": {
+                  "weak": [
+                    "libnl >=3.11.0,<4.0a0"
+                  ]
+                }
+              },
+              {
+                "name": "ncurses",
+                "version": "6.6",
+                "build": "hdb14827_1",
+                "build_number": 1,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.6-hdb14827_1.conda",
+                "sha256": "5d46557214ed184381dafe835b7c94a474a1c3b307a08a250b1ea4779b44ffb3",
+                "size": 911196,
+                "timestamp": 1786355078102,
+                "md5": "ee6c0cd80a60961a1f48aa3e0b91f986",
+                "license": "X11 AND BSD-3-Clause",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0",
+                  "libgcc >=14"
+                ],
+                "run_exports": {
+                  "weak": [
+                    "ncurses >=6.6,<7.0a0"
+                  ]
+                }
+              },
+              {
+                "name": "oniguruma",
+                "version": "6.9.10",
+                "build": "hebe6cf0_1",
+                "build_number": 1,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/oniguruma-6.9.10-hebe6cf0_1.conda",
+                "sha256": "098de630b10d3276d52b075360fa8492574ac3f60ff098a8f32cc1738274f1dd",
+                "size": 281251,
+                "timestamp": 1788946162424,
+                "md5": "d0d628a0259bb9cbcd73f792b0b61387",
+                "license": "BSD-2-Clause",
+                "license_family": "BSD",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0",
+                  "libgcc >=15"
+                ],
+                "run_exports": {
+                  "weak": [
+                    "oniguruma >=6.9.10,<6.10.0a0"
+                  ]
+                }
+              }
+            ],
+            "materializer": {
+              "bytecode": "suppress",
+              "receipt": "normalized_conda_meta"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
