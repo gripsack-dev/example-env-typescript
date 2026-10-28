@@ -1,0 +1,144 @@
+{
+  "lock_version": 2,
+  "definitions": {
+    "frontend": "16deab7a66186c1cfec64cfb32204d5d2c4621c8d852422a7f1003cf57ac6d83"
+  },
+  "resolutions": {
+    "linux-x86_64-gnu": {
+      "pins": [
+        {
+          "output": "ripgrep",
+          "source": {
+            "kind": "pixi_lock",
+            "manifest": "pixi-manifest",
+            "lock": "pixi-lock",
+            "environment": "default",
+            "manifest_sha256": "dd07e082422c2523a8bbdd2bccfd0963e671a50f8abf6a0d749d21f839e70f56",
+            "lock_sha256": "324f5c85f4875e15bcbb3bafb8f8db5a3c3a24c97efc38b11faae1985f985cb4"
+          },
+          "resolved": {
+            "sha256": "d2e86fc6c922a67fa0d086d7862a6c9eb29eeef168727defe2c0305a20926cd3"
+          },
+          "conda": {
+            "platform": "linux-64",
+            "channels": [
+              "https://conda.anaconda.org/conda-forge"
+            ],
+            "channel_priority": "strict",
+            "system_requirements": {
+              "virtual_packages": [
+                {
+                  "name": "__glibc",
+                  "minimum_version": "2.28"
+                },
+                {
+                  "name": "__linux",
+                  "minimum_version": "4.18"
+                }
+              ]
+            },
+            "packages": [
+              {
+                "name": "_openmp_mutex",
+                "version": "4.5",
+                "build": "20_gnu",
+                "build_number": 20,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-20_gnu.conda",
+                "sha256": "1dd3fffd892081df9726d7eb7e0dea6198962ba775bd88842135a4ddb4deb3c9",
+                "size": 28948,
+                "timestamp": 1770939786096,
+                "md5": "a9f577daf3de00bca7c3c76c0ecbd1de",
+                "arch": "x86_64",
+                "platform": "linux",
+                "license": "BSD-3-Clause",
+                "license_family": "BSD",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0",
+                  "libgomp >=7.5.0"
+                ],
+                "constrains": [
+                  "openmp_impl <0.0a0"
+                ]
+              },
+              {
+                "name": "libgcc",
+                "version": "16.2.0",
+                "build": "ha9f2e26_7",
+                "build_number": 7,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/libgcc-16.2.0-ha9f2e26_7.conda",
+                "sha256": "e031634c3a928f9594eba868bc46ef5230d6571a364a0c63215b06c4563bfcea",
+                "size": 1058444,
+                "timestamp": 1790303109576,
+                "md5": "735629b400b70eeab21a2ba8f5b1c2ce",
+                "arch": "x86_64",
+                "platform": "linux",
+                "license": "GPL-3.0-only WITH GCC-exception-3.1",
+                "license_family": "GPL",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0",
+                  "_openmp_mutex >=4.5"
+                ],
+                "constrains": [
+                  "libgcc-ng ==16.2.0=*_7",
+                  "libgomp 16.2.0 he0feb66_7"
+                ]
+              },
+              {
+                "name": "libgomp",
+                "version": "16.2.0",
+                "build": "he0feb66_7",
+                "build_number": 7,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/libgomp-16.2.0-he0feb66_7.conda",
+                "sha256": "92a0bb350c7be6a4eedcb4e111c60aefd176018e6b1c009a6e025dbe9bbcd758",
+                "size": 640566,
+                "timestamp": 1790303046034,
+                "md5": "d904c7ddd95e026254b4b80808ee9e12",
+                "arch": "x86_64",
+                "platform": "linux",
+                "license": "GPL-3.0-only WITH GCC-exception-3.1",
+                "license_family": "GPL",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0"
+                ]
+              },
+              {
+                "name": "ripgrep",
+                "version": "15.1.0",
+                "build": "hdab8a38_0",
+                "build_number": 0,
+                "subdir": "linux-64",
+                "channel": "https://conda.anaconda.org/conda-forge",
+                "url": "https://conda.anaconda.org/conda-forge/linux-64/ripgrep-15.1.0-hdab8a38_0.conda",
+                "sha256": "a745b0d0ca5ae53757e42d893a61a5034ed2ad4791728e376dbc5c6a4f9c3eb0",
+                "size": 1737412,
+                "timestamp": 1761210874723,
+                "md5": "1f9739b74aab91a4c9c7aea7a6987dbb",
+                "arch": "x86_64",
+                "platform": "linux",
+                "license": "MIT",
+                "license_family": "MIT",
+                "depends": [
+                  "__glibc >=2.17,<3.0.a0",
+                  "libgcc >=14"
+                ],
+                "constrains": [
+                  "__glibc >=2.17"
+                ]
+              }
+            ],
+            "materializer": {
+              "bytecode": "suppress",
+              "receipt": "normalized_conda_meta"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

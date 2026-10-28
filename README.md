@@ -1,56 +1,28 @@
-# example-env-typescript
+# gripsack workspace examples
 
 [![ci](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml)
 
-Linux x86_64 API examples for **gripsack 0.46.0** and **@gripsack/core 0.46.0**.
-`package.json` and its lock select the published SDK; no sibling core checkout
-or private SDK build is required.
+Readable TypeScript workspaces for **gripsack 0.50.0** and **@gripsack/core
+0.50.0**, targeting Linux/WSL x86_64. Install the matching
+[released `grip` binary](https://github.com/gripsack-dev/gripsack/releases/tag/core-v0.50.0),
+verify its archive against the release SHA-256 sidecar, then install the locked
+SDK with `npm ci`. `npx tsc` checks all three entrypoints without executing them.
 
-## Two independent entrypoints
+## Personal tools and configuration
 
-- The repository root retains the module examples: a Homebrew `jq` bottle,
-  pinned GitHub `starship`, the `gripfetch-apt` transport for `htop`, local
-  `hello`, a patch step, and tracked editor configuration. Their producers and
-  existing byte pins are unchanged.
-- `workspaces/conda/gripsack.ts` demonstrates coherent Conda `ripgrep`: one full
-  transitive lock, an explicit glibc2.28/Linux4.18 solve baseline, final-prefix
-  materialization, a project environment, a direct task and a personal profile.
-  The obsolete global-Pixi path and legacy ripgrep lock are not restored.
+The root [`gripsack.ts`](gripsack.ts) declares:
 
-Keeping separate entrypoints preserves the bottle/plugin/steps demonstrations
-without pretending those legacy producers are workspace recipes. The Conda
-workspace needs no builder, private Pixi installation or ambient Conda prefix.
+- `hello`: a native package from the captured `payloads/hello.tar.gz` archive.
+- `starship`: the upstream v1.20.0 native release, pinned by SHA-256.
+- `utilities`: `jq` and `htop` in one coherent Conda runtime closure.
+- `development`: a process-scoped environment exposing those commands.
+- `personal`: the same tools plus the tracked `configs/editor.toml` file at
+  `~/.config/editor/editor.toml`.
+- `greet` and `versions`: explicit manual tasks; `apply` does not run them.
 
-## Typecheck
-
-Install the locked npm dependencies and check both entrypoints:
-
-```sh
-npm ci
-npx tsc
-```
-
-The standalone CI uses the same published SDK and lockfile. The core repository
-separately runs its pinned API-canary fixture against its candidate SDK and binary.
-
-## Try the reviewed examples
-
-Use the matching [released `grip` binary](https://github.com/gripsack-dev/gripsack/releases/tag/core-v0.46.0),
-verifying its archive against the published SHA-256 sidecar before extracting.
-Start with disposable state; `apply` otherwise changes your real home. Review
-the exact checkout, SDK, lockfiles and effective policy before approving them.
-The legacy `htop` lock targets Ubuntu 24.04. Run that entrypoint in the matching
-environment with configured, refreshed apt indexes (`sudo apt update`); another
-distro's package version does not satisfy the lock. The Conda entrypoint is
-independent of those apt records.
-The legacy apt transport extracts one package, not its dependency closure, so
-that package's native runtime libraries must already be installed on the host.
-The exercised Ubuntu 24.04 baseline has `libncursesw6`, `libtinfo6`,
-`libnl-3-200` and `libnl-genl-3-200`; the approval commands below also need `jq`.
-This is not a claim that the extracted apt payload is portable to other distros.
-
-Run from the repository root. Keep **all** state outside the checkout so state
-writes cannot change captured source:
+Builds and project commands do not activate a personal profile. Applying a
+profile changes your home and retains a generation for rollback. Start with
+disposable state outside the checkout:
 
 ```sh
 set -eu
@@ -65,13 +37,12 @@ chmod 700 "$XDG_RUNTIME_DIR"
 grip trust inspect --json
 ```
 
-Record the expected bundle and policy digests from your **separate review** of
-this exact checkout and policy. Do not populate the expected values from the
-inspection being checked. After setting `EXPECTED_BUNDLE` and `EXPECTED_POLICY`
-to those reviewed values, compare before adding approval:
+Review the exact checkout, installed SDK, locks and effective policy separately.
+Set `EXPECTED_BUNDLE` and `EXPECTED_POLICY` to the digests from that review, not
+from the inspection you are checking. The following approval helper requires
+an existing `jq` on the host:
 
 ```sh
-set -eu
 approve_reviewed_example() {
   : "${EXPECTED_BUNDLE:?Set the separately reviewed bundle digest}"
   : "${EXPECTED_POLICY:?Set the separately reviewed policy digest}"
@@ -82,23 +53,33 @@ approve_reviewed_example() {
   grip trust add --bundle "$EXPECTED_BUNDLE" --policy "$EXPECTED_POLICY"
 }
 approve_reviewed_example
-grip check --host laptop
-grip apply --host laptop
-grip apply --host laptop       # already satisfied
+grip check
+grip build hello
+grip run --env development -- hello
+grip task run greet
+grip task run versions
+grip apply personal
+grip apply personal             # already satisfied
+grip shell development          # exit to leave the process-scoped environment
+grip gc --dry-run               # inspect retained state before collecting
 ```
 
-If a command changes captured files, stop and review the generated changes,
-then record the newly reviewed expected values and renew exact approval.
-An automated test may approve its own inspected, known fixture; that is not
-an unattended production approval recipe.
+Use `grip rollback` to select retained personal state. If captured files change,
+stop, review them and renew approval for the new digests. Do not automate trust
+by approving whatever source happens to be present.
 
-For the independent Conda workspace, repeat the state setup above with a new
-directory, then inspect and separately review this entrypoint's expected digests.
-The released core provisions its byte-pinned helper automatically; no source
-build, helper mirror or private helper override is required:
+## Frozen Conda environment
+
+[`workspaces/conda/gripsack.ts`](workspaces/conda/gripsack.ts) is the focused
+`ripgrep` example: one complete transitive lock, explicit glibc 2.28/Linux 4.18
+solver requirements, final-prefix materialization, a project environment,
+a manual task and a personal profile. It needs no build worker, ambient Conda
+prefix or Pixi installation; `grip` provisions its byte-pinned environment helper.
+
+Use fresh disposable state as above, then enter this independent workspace and
+review its own bundle and policy before approving it:
 
 ```sh
-set -eu
 cd workspaces/conda
 grip trust inspect --json
 # Set EXPECTED_BUNDLE and EXPECTED_POLICY from the separate workspace review.
@@ -106,33 +87,50 @@ approve_reviewed_example
 grip check
 grip build ripgrep
 grip run --env search -- rg --version
-grip task version
+grip task run version
 grip apply personal
-grip apply personal            # already satisfied
-grip shell search              # process-scoped rg; exit to leave the shell
-grip gc --dry-run              # inspect retained workspace/profile state
+grip apply personal             # already satisfied
+grip shell search
+grip gc --dry-run
 ```
 
-The committed lock reconstructs a cold prefix from its exact archive URLs and
-hashes. Frozen build/run/task/shell/profile consumers never solve again or mutate
-that prefix. To deliberately select newer packages, run `grip update ripgrep`,
-review the changed lock, and approve its new source digest before consuming it.
-`grip rollback` selects retained personal state. These examples target Linux
-x86_64/WSL only; no ARM, macOS or native Windows qualification is claimed.
+The committed lock reconstructs a cold prefix from exact archive URLs and
+hashes. Frozen build/run/task/shell/profile consumers do not solve again or
+mutate the installed prefix. To deliberately choose newer packages, run
+`grip update ripgrep`, review the complete generated lock and renew source
+approval before consuming it. The frontend identity is also locked: changing
+the SDK requires an explicit update, not hand-edited fingerprints. A declared
+solver baseline does not prove compatibility with every CPU, kernel or host.
 
-The workspace lock includes captured frontend identity for SDK 0.46.0. It was
-migrated through `grip update ripgrep`, not by editing fingerprints. Review the
-entire generated lock (frontend identity, platform assumptions, package versions,
-archive URLs and hashes) before renewing approval. Selecting a different SDK
-can require another explicit update and source approval; frozen consumers do
-not silently accept changed frontend bytes.
-The migration was generated in Ubuntu24.04 (glibc2.39), using the declared
-glibc2.28/Linux4.18 solver virtuals. All four Conda archive identities and the
-legacy byte pins remained unchanged. A solve floor is not proof of every host's
-CPU/kernel/runtime compatibility.
+## Import an existing Pixi lock
 
-The public0.46 core, installed npm SDK and default downloaded helper passed the
-legacy and workspace journeys as UID1000. A separate network-disabled run with
-the helper removed reused the frozen prefix without changing lock bytes, prefix
-contents, modes, inodes or mtimes. That is Linux userspace on the observed WSL
-kernel, not a physical-power-loss or universal portability claim.
+[`examples/pixi`](examples/pixi) contains a small real `pixi.toml`/`pixi.lock`
+pair and a workspace using `pixi.fromLock`. The manifest and lock are explicit
+workspace inputs; the selected environment is `default`, with `rg` exposed from
+`bin/rg`. Import consumes that locked closure, not a fresh solve or a global
+Pixi installation. The files are committed so documentation checks need no
+external fixture download; materializing a cold environment still downloads
+the pinned package archives.
+
+With separate disposable state and approval for this workspace:
+
+```sh
+cd examples/pixi                # from the repository root
+grip trust inspect --json
+# Set EXPECTED_BUNDLE and EXPECTED_POLICY from the separate workspace review.
+approve_reviewed_example
+grip update ripgrep             # explicitly import the reviewed Pixi inputs
+# Review the generated gripsack.lock and renew approval for the new bundle.
+approve_reviewed_example
+grip build ripgrep
+grip run --env search -- rg --version
+```
+
+The Pixi pair was generated by the official
+[Pixi v0.55.0](https://github.com/prefix-dev/pixi/releases/tag/v0.55.0) command
+`pixi lock --manifest-path examples/pixi/pixi.toml`, using isolated temporary
+HOME/cache directories. Its Linux x86_64 musl release archive was checked
+against published SHA-256
+`cb733205ae1a02986071bcbeff47c60460bfb92d1cd9565d40f4dea5448c86a5`.
+The unedited version-6 lock records conda-forge's `ripgrep 15.1.0` and its three
+runtime dependencies, with their actual archive URLs and SHA-256 hashes.
