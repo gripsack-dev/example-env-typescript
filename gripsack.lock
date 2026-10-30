@@ -1,9 +1,9 @@
 {
-  "lock_version": 2,
+  "lock_version": 3,
   "definitions": {
-    "frontend": "16deab7a66186c1cfec64cfb32204d5d2c4621c8d852422a7f1003cf57ac6d83",
+    "frontend": "3adae9ff45b5de7bb065b77085898f8c7d88af4e8cfff89de6b1a3391aa0e991",
     "imports": {
-      "@gripsack/core": "2a4cdd2ffbbc323d96821255308dac7da4c46ffd09c2762a27fd820173e61bcd",
+      "@gripsack/core": "05cf89e4f45e6e0850acd70d5bc7777b95991ec4def840d6fd4b901dd9803dbb",
       "@types/node": "f5bea22b23c8c9b4af945e7a1ea2d9d577f2dd49305ce4cd0f22b392ff0b0db3",
       "typescript": "e3c527fc0ad721959f1751893f0923f27503a5b2e7e1bfa62c2dd61db797fc90",
       "undici-types": "a3033f5fdf74aa4ea8ce8757ba563440e495c486a7de8eef39dc3de2234bafe9"
