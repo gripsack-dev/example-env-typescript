@@ -2,16 +2,16 @@
 
 [![ci](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml/badge.svg)](https://github.com/gripsack-dev/example-env-typescript/actions/workflows/ci.yml)
 
-Readable TypeScript workspaces for **gripsack 0.51.0** and **@gripsack/core
-0.51.0**, targeting Linux/WSL2 x86_64. Install the matching
-[released `grip` binary](https://github.com/gripsack-dev/gripsack/releases/tag/core-v0.51.0),
+Readable TypeScript workspaces for **gripsack 0.52.0** and **@gripsack/core
+0.52.0**, targeting Linux/WSL2 x86_64. Install the matching
+[released `grip` binary](https://github.com/gripsack-dev/gripsack/releases/tag/core-v0.52.0),
 verify its archive against the release SHA-256 sidecar, then install the locked
 SDK with `npm ci`. `npx tsc` checks all three entrypoints without executing them.
 
 These native examples need neither Docker nor systemd. The SDK emits IR10;
 the committed Gripsack locks use lock version 3 and the native environment
 helper uses protocol 4. Keep the core, SDK and provisioned helper on the same
-0.51 release. Install the SDK from the exact GitHub release URL in
+0.52 release. Install the SDK from the exact GitHub release URL in
 `package-lock.json`, not a floating version or a different local package.
 
 Each `gripsack.ts` is an independent workspace entrypoint. The root stays a
